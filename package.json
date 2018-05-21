@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --silent --runInBand",
     "test:coverage": "jest --silent --coverage",
-    "build": "babel ./lib --out-dir=./dist --presets env",
+    "build": "rm -r dist && mkdir dist && babel ./lib --out-dir=./dist --presets env",
     "lint": "eslint --fix --ignore-path .gitignore ."
   },
   "repository": {
