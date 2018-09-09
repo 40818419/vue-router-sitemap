@@ -1,6 +1,6 @@
 {
   "name": "vue-router-sitemap",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Module to generate a sitemap for vue-router configuration",
   "main": "dist/index.js",
   "scripts": {
