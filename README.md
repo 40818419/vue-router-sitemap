@@ -7,11 +7,12 @@ Generate sitemap.xml by vue-router configuration
 
 ## Example usage
 
-```
+```js
 import VueRouterSitemap      from 'vue-router-sitemap';
 import path                  from 'path';
 import { router }            from 'router';
 
+...
 export const sitemapMiddleware = () => {
   return (req, res) => {
     res.set('Content-Type', 'application/xml');
@@ -30,4 +31,7 @@ export const sitemapMiddleware = () => {
     return res.sendFile(staticSitemap);
   };
 };
+
+app.get('/sitemap.xml', sitemapMiddleware());
+...
 ```

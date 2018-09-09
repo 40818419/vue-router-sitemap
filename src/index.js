@@ -32,8 +32,6 @@ class VueRouterSitemap {
     applyParams(paramsConfig) {
         this.paths = applyParams(this.paths, paramsConfig);
         return this;
-        
-        return this;
     }
 
     build(hostname = 'http://localhost', { limitCountPaths = 49999 } = {}) {

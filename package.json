@@ -1,12 +1,12 @@
 {
   "name": "vue-router-sitemap",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "Module to generate a sitemap for vue-router configuration",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest --silent --runInBand",
     "test:coverage": "jest --silent --coverage",
-    "build": "rm -r dist && mkdir dist && babel ./lib --out-dir=./dist --presets env",
+    "build": "rm -r dist && mkdir dist && babel ./src --out-dir=./dist --presets env",
     "lint": "eslint --fix --ignore-path .gitignore ."
   },
   "repository": {
