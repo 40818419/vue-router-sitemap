@@ -8,6 +8,26 @@ Generate sitemap.xml by vue-router configuration
 ## Example usage
 
 ```js
+// router.js
+
+import VueRouter from 'vue-router';
+
+export const router: VueRouter = new VueRouter(
+  {
+    routes: [
+      {
+        path:      '/',
+        name:      'index',
+        component: Index,
+      },
+    ],
+  },
+);
+```
+
+```js
+// sitemapMiddleware.js
+
 import VueRouterSitemap      from 'vue-router-sitemap';
 import path                  from 'path';
 import { router }            from 'router';

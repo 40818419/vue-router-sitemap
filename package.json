@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --silent --runInBand",
     "test:coverage": "jest --silent --coverage",
-    "build": "rm -r dist && mkdir dist && babel ./src --out-dir=./dist --presets env",
+    "build": "rimraf dist && babel ./src --out-dir=./dist --presets env",
     "lint": "eslint --fix --ignore-path .gitignore ."
   },
   "repository": {
@@ -41,7 +41,8 @@
     "babel-preset-env": "1.6.1",
     "eslint": "4.19.1",
     "eslint-plugin-vue": "4.4.0",
-    "jest": "22.4.3"
+    "jest": "22.4.3",
+    "rimraf": "^2.6.2"
   },
   "peerDependencies": {
     "vue-router": "3.0.1"

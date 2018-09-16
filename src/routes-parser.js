@@ -1,6 +1,5 @@
-
 const parseRoutes = (routes = []) => {
-    return routes;
+  return routes;
 };
 
 export default parseRoutes;

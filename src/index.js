@@ -1,64 +1,64 @@
-import fs   from 'fs';
+import fs from 'fs';
 import path from 'path';
 
 import sitemap from '../node_modules/sitemap';
 
-import parseRoutes  from './routes-parser';
+import parseRoutes from './routes-parser';
 import buildSitemap from './sitemap-builder';
-import splitPaths   from './path-splitter';
-import filterPaths  from './paths-filter';
+import splitPaths from './path-splitter';
+import filterPaths from './paths-filter';
 
 class VueRouterSitemap {
-    constructor(router) {
-        if (!router) {
-            throw new Error('Need pass router in module');
-        }
-
-        this.paths = parseRoutes(router.options.routes);
-
-        return this;
+  constructor(router) {
+    if (!router) {
+      throw new Error('Need pass router in module');
     }
 
-    filterPaths(filterConfig) {
-        this.paths = filterPaths(
-            this.paths,
-            filterConfig.rules,
-            filterConfig.isValid || false,
-        );
+    this.paths = parseRoutes(router.options.routes);
 
-        return this;
-    }
+    return this;
+  }
 
-    applyParams(paramsConfig) {
-        this.paths = applyParams(this.paths, paramsConfig);
-        return this;
-    }
+  filterPaths(filterConfig) {
+    this.paths = filterPaths(
+      this.paths,
+      filterConfig.rules,
+      filterConfig.isValid || false,
+    );
 
-    build(hostname = 'http://localhost', { limitCountPaths = 49999 } = {}) {
-        this.hostname = hostname;
-        this.splitted = splitPaths(this.paths, limitCountPaths);
-        this.sitemaps = this.splitted.map(paths => buildSitemap(hostname, paths));
+    return this;
+  }
 
-        return this;
-    }
+  applyParams(paramsConfig) {
+    this.paths = applyParams(this.paths, paramsConfig);
+    return this;
+  }
 
-    save(dist, publicPath = '/') {
-        const sitemapPaths = [];
+  build(hostname = 'http://localhost', { limitCountPaths = 49999 } = {}) {
+    this.hostname = hostname;
+    this.splitted = splitPaths(this.paths, limitCountPaths);
+    this.sitemaps = this.splitted.map(paths => buildSitemap(hostname, paths));
 
-        this.sitemaps.map((sitemap, index) => {
-            const savePath = dist.replace('.xml', `-${index}.xml`);
-            fs.writeFileSync(savePath, sitemap.toString());
-            sitemapPaths.push(this.hostname + publicPath + path.basename(savePath));
-        });
+    return this;
+  }
 
-        const sitemapIndex = sitemap.buildSitemapIndex({
-                                                           urls:     sitemapPaths,
-                                                           hostname: this.hostname,
-                                                       });
-        fs.writeFileSync(dist, sitemapIndex);
+  save(dist, publicPath = '/') {
+    const sitemapPaths = [];
 
-        return this;
-    }
+    this.sitemaps.forEach((sitemap, index) => {
+      const savePath = dist.replace('.xml', `-${index}.xml`);
+      fs.writeFileSync(savePath, sitemap.toString());
+      sitemapPaths.push(this.hostname + publicPath + path.basename(savePath));
+    });
+
+    const sitemapIndex = sitemap.buildSitemapIndex({
+      urls: sitemapPaths,
+      hostname: this.hostname,
+    });
+    fs.writeFileSync(dist, sitemapIndex);
+
+    return this;
+  }
 }
 
 export default VueRouterSitemap;
