@@ -55,3 +55,6 @@ export const sitemapMiddleware = () => {
 app.get('/sitemap.xml', sitemapMiddleware());
 ...
 ```
+
+## License
+MIT
