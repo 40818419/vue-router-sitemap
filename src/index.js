@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import sitemap from '../node_modules/sitemap';
+import sitemap from 'sitemap';
 
 import parseRoutes from './routes-parser';
 import buildSitemap from './sitemap-builder';

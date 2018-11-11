@@ -1,4 +1,4 @@
-import sitemap from '../node_modules/sitemap';
+import sitemap from 'sitemap';
 
 const buildSitemap = (hostname = 'http://localhost', paths = []) => {
   return sitemap.createSitemap({
